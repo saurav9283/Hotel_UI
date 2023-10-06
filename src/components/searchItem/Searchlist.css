@@ -1,0 +1,96 @@
+.searchitem{
+    border: 1px solid lightgrey;
+    padding: 10px;
+    border-radius: 5px;
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    margin-bottom: 20px;
+}
+.searchimage{
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+}
+.searchDesc{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    flex: 2;
+}
+.searchTitle{
+    color: #0071c2;
+    font-size: 20px;
+}
+.distance{
+    font-size: 12px;
+}
+.taxioption{
+    font-size: 12px;
+    width: max-content;
+    background-color: #008009;
+    color: white;
+    padding: 3px;
+    border-radius: 5px;
+}
+.subtitle{
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.features{
+    font: 12px;
+}
+.canceloption{
+    font-size: 12px;
+    color: #008009;
+    font-weight: bold;
+}
+.cancelsubtitle{
+    font-size: 12px;
+    color: #008009;
+}
+
+.searchdetails{
+    flex: 1;
+    font-size: small;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.searchitemrating{
+    display: flex;
+    justify-content: space-between;
+}
+.searchitemrating span{
+    font-weight: 500;
+}
+.searchitemrating button{
+    background-color: #003580;
+    color: white;
+    font-weight: bold;
+    border: none;
+}
+.searchdetailtaxes{
+    text-align: right;
+    display: flex;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+.seacrhprice{
+    font-size: 12px;
+}
+.searchtax{
+    font-size: 12px;
+    color: gray;
+}
+.searchCheckbutton{
+    background-color: #0071c2;
+    color: white;
+    font-weight: bold;
+    padding: 10px 5px;
+    border: none;
+    cursor: pointer;
+}
