@@ -1,7 +1,12 @@
 import "./Searchlist.css";
 import s1 from "../images/searchimg.jpeg";
+import { useNavigate } from "react-router-dom";
 
 const Searchlist = () => {
+  const navigate = useNavigate();
+ const handelsearch =() => {
+  navigate("hotels:527h")
+ }
   return (
     <div className="searchitem">
       {/* <div > */}
@@ -30,7 +35,7 @@ const Searchlist = () => {
         <div className="searchdetailtaxes">
         <span className="searchprice">$123</span>
         <span className="searchtax">Include taxes and fees</span>
-        <button className="searchCheckbutton">See availability</button>
+        <button className="searchCheckbutton" onClick={handelsearch}>See availability</button>
 
         </div>
       </div>
