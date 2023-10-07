@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Navbar from "../../components/navbar/Navbar";
 import Header from "../../components/header/Header";
@@ -29,6 +29,18 @@ function Hotel() {
     setslidercount(i);
     setopen(true);
   };
+  const handelMove=(direction)=>{
+    let newSlideNumber;
+
+    if(direction === "left")
+    {
+        newSlideNumber = slidercount === 0 ? 5: slidercount-1
+    }
+    else{
+      newSlideNumber = slidercount === 5 ? 0: slidercount+1
+    }
+    setslidercount(newSlideNumber)
+  }
   return (
     <div>
       <Navbar />
@@ -36,11 +48,11 @@ function Hotel() {
       <div className="hotelContainer">
         {open && <div className="slider">
           <FontAwesomeIcon icon={faCircleXmark} className="close"onClick={()=>setopen(false)}/>
-          <FontAwesomeIcon icon={faCircleArrowLeft} className="arrow" />
+          <FontAwesomeIcon icon={faCircleArrowLeft} className="arrow"  onClick={()=>handelMove("left")}/>
           <div className="sliderwrapper">
             <img src={photos[slidercount].src} alt="" className="sliderimage"/>
           </div>
-          <FontAwesomeIcon icon={faCircleArrowRight} className="arrow"/>
+          <FontAwesomeIcon icon={faCircleArrowRight} className="arrow" onClick={()=>handelMove("right")}/>
         </div>}
         <div className="hotelWrapper">
           <button className="booknow">Reserve or Book Now!</button>
