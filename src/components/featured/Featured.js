@@ -3,8 +3,11 @@ import "./Featured.css";
 import dubai from "../images/dubai.jpeg";
 import mountain from "../images/mountain.jpeg";
 import sea from "../images/sea.jpeg";
+import useFetch from "../hooks/useFetch";
 
 function Featured() {
+  const {data , loading , error} = useFetch("http://localhost:8000/api/hotels/countByCity?cities=Jalandhar,barlin,london")
+
   return (
     <div className="featured">
       <div className="featuredItem">
