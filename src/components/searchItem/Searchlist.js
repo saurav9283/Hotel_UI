@@ -1,8 +1,8 @@
 import "./Searchlist.css";
 import s1 from "../images/searchimg.jpeg";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
-const Searchlist = () => {
+const Searchlist = ({item}) => {
   const navigate = useNavigate();
  const handelsearch =() => {
   navigate("hotels:527h")
@@ -11,10 +11,11 @@ const Searchlist = () => {
     <div className="searchitem">
       {/* <div > */}
       <img src={s1} alt="" className="searchimage" />
+      {/* <img src={item.photos[0]} alt="" className="searchimage" /> */}
       {/* </div> */}
       <div className="searchDesc">
-        <h1 className="searchTitle">Tower Street Apartment</h1>
-        <span className="distance">500m from center Road</span>
+        <h1 className="searchTitle">{item.name}</h1>
+        <span className="distance">{item.desc}</span>
         <span className="taxioption">Free airpoart taxi</span>
         <span className="subtitle">Studio Apartment with Air conditioning</span>
 
@@ -28,14 +29,16 @@ const Searchlist = () => {
         </span>
       </div>
       <div className="searchdetails">
-        <div className="searchitemrating">
+        {item.rating && <div className="searchitemrating">
           <span>Excellent</span>
-          <button>8.9</button>
-        </div>
+          <button>{item.rating}</button>
+        </div>}
         <div className="searchdetailtaxes">
-        <span className="searchprice">$123</span>
+        <span className="searchprice">${item.cheapestPrice}</span>
         <span className="searchtax">Include taxes and fees</span>
+        <Link to={`/hotels/${item._id}`}>
         <button className="searchCheckbutton" onClick={handelsearch}>See availability</button>
+        </Link>
 
         </div>
       </div>

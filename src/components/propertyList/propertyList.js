@@ -1,55 +1,44 @@
 import React from "react";
 import "./propertyList.css";
-import hotel from "../images/hotel.jpeg"
-import appartments from "../images/appartments.jpeg"
-import resort from "../images/resort.jpeg"
-import villa from "../images/villa.jpeg"
-import snow from "../images/snow.jpeg"
+import useFetch from "../hooks/useFetch.js";
 
-function propertyList() {
+function PropertyList() {
+  const { data, loading, error } = useFetch(
+    "http://localhost:8000/api/hotels/countByType"
+  );
+
+  const images = ["hotel", "appartments", "resort", "villa", "snow"];
+
   return (
     <div className="pList">
-      <div className="pListItem">
-        <img src={hotel} alt="" className="pListImg"></img>    
-        <div className="pListTitle">
-            <h1>Hotels</h1>
-            <h2>233 Hotels</h2>
-        </div>    
-      </div>
-
-      <div className="pListItem">
-        <img src={appartments} alt="" className="pListImg"></img>    
-        <div className="pListTitle">
-            <h1>Apartment</h1>
-            <h2>233 Hotels</h2>
-        </div>    
-      </div>
-
-      <div className="pListItem">
-        <img src={resort} alt="" className="pListImg"></img>    
-        <div className="pListTitle">
-            <h1>Resorts</h1>
-            <h2>233 Hotels</h2>
-        </div>    
-      </div>
-
-      <div className="pListItem">
-        <img src={villa} alt="" className="pListImg"></img>    
-        <div className="pListTitle">
-            <h1>Villas</h1>
-            <h2>233 Hotels</h2>
-        </div>    
-      </div>
-
-      <div className="pListItem">
-        <img src={snow} alt="" className="pListImg"></img>    
-        <div className="pListTitle">
-            <h1>Cabins</h1>
-            <h2>233 Hotels</h2>
-        </div>    
-      </div>
+      {loading ? (
+        "Loading"
+      ) : (
+        <>
+          {data &&
+            images.map((img, index) => {
+              const matchingData = data.find((item) => item.type === img);
+              return (
+                <div key={index} className="pListItem">
+                  <img
+                    src={require(`../images/${img}.jpeg`)}
+                    alt={img}
+                    className="pListImg"
+                  />
+                  <div className="pListTitle">
+                    <h1>{img.charAt(0).toUpperCase() + img.slice(1)}</h1>
+                    <h2>
+                      {matchingData ? matchingData.count : 0}{" "}
+                      {img.charAt(0).toUpperCase() + img.slice(1)}
+                    </h2>
+                  </div>
+                </div>
+              );
+            })}
+        </>
+      )}
     </div>
   );
 }
 
-export default propertyList;
+export default PropertyList;

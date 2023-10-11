@@ -1,54 +1,39 @@
 import React from "react";
 import "./featuredProperty.css";
-import hotel from "../images/hotel.jpeg"
+import hotel from "../images/hotel.jpeg";
+import useFetch from "../hooks/useFetch";
 
-function featuredProperty() {
+function FeaturedProperty() {
+  const { data, loading, error } = useFetch(
+    "http://localhost:8000/api/hotels?featured=true"
+    // "http://localhost:8000/api/hotels?featured=true&limit=2"
+  );
+
   return (
-    // <>
     <div className="fp">
-      <div className="fpItem">
-        <img src={hotel} alt="" className="fpImg"></img>
-        <span className="fpname">Aparhotel Stare Miasto</span>
-        <span className="fpCity">Madrid</span>
-        <span className="fpPrice">Starting from $120</span>
-        <div className="fpRating">
-          <button className="fpButton">8.9</button>
-          <span>Excillent</span>
-        </div>
-      </div>
-      <div className="fpItem">
-        <img src={hotel} alt="" className="fpimg"></img>
-        <span className="fpname">Aparhotel Stare Miasto</span>
-        <span className="fpCity">Madrid</span>
-        <span className="fpPrice">Starting from $120</span>
-        <div className="fpRating">
-          <button className="fpButton">8.9</button>
-          <span>Excillent</span>
-        </div>
-      </div>
-      <div className="fpItem">
-        <img src={hotel} alt="" className="fpImg"></img>
-        <span className="fpname">Aparhotel Stare Miasto</span>
-        <span className="fpCity">Madrid</span>
-        <span className="fpPrice">Starting from $120</span>
-        <div className="fpRating">
-          <button className="fpButton">8.9</button>
-          <span>Excillent</span>
-        </div>
-      </div>
-      <div className="fpItem">
-        <img src={hotel} alt="" className="fpImg"></img>
-        <span className="fpname">Aparhotel Stare Miasto</span>
-        <span className="fpCity">Madrid</span>
-        <span className="fpPrice">Starting from $120</span>
-        <div className="fpRating">
-          <button className="fpButton">8.9</button>
-          <span>Excillent</span>
-        </div>
-      </div>
-      </div>
-    // </>
+      {loading ? (
+        "Loading"
+      ) : (
+        <>
+          {
+            data.map((item) => (
+              <div className="fpItem" key={item._id}>
+            {/* <img src={item.photos[0]} alt="" className="fpImg"></img> */}
+            <img src={hotel} alt="" className="fpImg"></img>
+            <span className="fpname">{item.name}</span>
+            <span className="fpCity">{item.city}</span>
+            <span className="fpPrice">Starting from ${item.cheapestPrice}</span>
+            {item.rating && 
+            <div className="fpRating">
+              <button className="fpButton">{item.rating}</button>
+              <span>Excillent</span>
+            </div>}
+          </div>
+      ))}
+        </>
+      )}
+    </div>
   );
 }
 
-export default featuredProperty;
+export default FeaturedProperty;
