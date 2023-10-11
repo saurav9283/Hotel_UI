@@ -10,29 +10,29 @@ function Featured() {
 
   return (
     <div className="featured">
-      <div className="featuredItem">
+      {loading ? "Loading please Wait": (<><div className="featuredItem">
         <img src={dubai} alt="dubai" className="featuredImg" />
         <div className="featuredTitles">
-          <h1>Dublin</h1>
-          <h2>Prop</h2>
+          <h1>Jalandhar</h1>
+          <h2>{data[0]}</h2>
         </div>
       </div>
 
       <div className="featuredItem">
         <img src={mountain} alt="mountain" className="featuredImg" />
         <div className="featuredTitles">
-          <h1>Dublin</h1>
-          <h2>Prop</h2>
+          <h1>Barlin</h1>
+          <h2>{data[1]}</h2>
         </div>
       </div>
 
       <div className="featuredItem">
         <img src={sea} alt="sea" className="featuredImg" />
         <div className="featuredTitles">
-          <h1>Dublin</h1>
-          <h2>Prop</h2>
+          <h1>London</h1>
+          <h2>{data[2]}</h2>
         </div>
-      </div>
+      </div></>)}
     </div>
   );
 }
