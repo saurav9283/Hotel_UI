@@ -6,8 +6,11 @@ import PropertyList from "../../components/propertyList/propertyList.js"
 import FeaturedProperty from "../../components/featuredProperty/featuredProperty.js"
 import MailList from "../../components/mailList/mailList.js"
 import Footer from "../../components/footer/footer.js"
+import useFetch from "../../components/hooks/useFetch.js"
+import { useLocation } from "react-router-dom"
 
 const Home = () => {
+  
   return (
     <div>
       <Navbar/>
