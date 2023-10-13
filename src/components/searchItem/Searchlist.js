@@ -5,7 +5,7 @@ import { Link, useNavigate } from "react-router-dom";
 const Searchlist = ({item}) => {
   const navigate = useNavigate();
  const handelsearch =() => {
-  navigate("hotels:527h")
+  navigate("/hotels")
  }
   return (
     <div className="searchitem">
@@ -29,7 +29,7 @@ const Searchlist = ({item}) => {
         </span>
       </div>
       <div className="searchdetails">
-        {item.rating && <div className="searchitemrating">
+        {item?.rating && <div className="searchitemrating">
           <span>Excellent</span>
           <button>{item.rating}</button>
         </div>}

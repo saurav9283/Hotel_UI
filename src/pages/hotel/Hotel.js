@@ -52,7 +52,6 @@ function Hotel() {
     const diffDays = Math.ceil(timeDiff/MILLISECONDS_PER_DAY);
     return diffDays;
   }
-  console.log(data.cheapestPrice , options.room)
 
   const days = (dayDifference(dates[0]?.endDate , dates[0]?.startDate))
 
@@ -115,8 +114,8 @@ function Hotel() {
             </div>
           )}
           <div className="hotelWrapper">
-            <button className="booknow">Reserve or Book Now!</button>
-            <h1 className="hoteltitle">{data.name}</h1>
+            <button className="booknow" onClick={handelClick}>Reserve or Book Now!</button>
+            <h1 className="hoteltitle">{data?.name}</h1>
             <div className="hotelAddress">
               <FontAwesomeIcon icon={faLocationDot} />
               <span>{data.address}</span>
@@ -142,7 +141,7 @@ function Hotel() {
           </div>
           <div className="hoteldetalis">
             <div className="hoteldetailstexts">
-              <h1 className="hoteltitle">{data.title}</h1>
+              <h1 className="hoteltitle">{data?.title}</h1>
               <p className="hotelDesc">
                 {data.desc}
               </p>
@@ -156,7 +155,7 @@ function Hotel() {
               <h2>
                 <b>${days * data?.cheapestPrice * options?.room }</b> ({days} nights)
               </h2>
-              <button onClick={handelClick}>Reserver or Book Now!!</button>
+              <button>Reserver or Book Now!!</button>
             </div>
           </div>
           <MailList />

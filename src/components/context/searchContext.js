@@ -10,7 +10,7 @@ const INITIAL_STATE = {
   },
 };
 
-export const searchContext = createContext(INITIAL_STATE); // Create to use everywhere
+export const searchContext = createContext(INITIAL_STATE); 
 
 const searchReducer = (state, action) => {
   switch (action.type) {
