@@ -18,10 +18,13 @@ import {
   faLocationDot,
 } from "@fortawesome/free-solid-svg-icons";
 import "./Hotel.css";
-import { useLocation } from "react-router-dom";
+import { Navigate, useLocation, useNavigate } from "react-router-dom";
 import useFetch from "../../components/hooks/useFetch";
 import { searchContext } from "../../components/context/searchContext";
+import { AuthContext } from "../../components/context/AuthContext";
+import Reserve from "../../components/reserve/Reserve";
 function Hotel() {
+  const navigate = useNavigate()
   const location = useLocation();
   const pathSegments = location.pathname.split("/");
   const id = pathSegments[2];
@@ -30,6 +33,7 @@ function Hotel() {
   );
   const [slidercount, setslidercount] = useState(0);
   const [open, setopen] = useState(false);
+  const [openModel, setopenModel] = useState(false);
   const photos = [
     { src: hotel, alt: "Hotel Room" },
     { src: room, alt: "Room View" },
@@ -38,6 +42,7 @@ function Hotel() {
     { src: sofa, alt: "sofa" },
     { src: dining, alt: "dining" },
   ];
+  const {user} = useContext(AuthContext)
 
   const {dates , options } = useContext(searchContext)
   // console.log(dates)
@@ -65,6 +70,16 @@ function Hotel() {
     }
     setslidercount(newSlideNumber);
   };
+
+  const handelClick =() => {
+    if(user)
+    {
+        setopenModel(true)
+    }
+    else{
+      navigate("/login")
+    }
+  }
   return (
     <div>
       <Navbar />
@@ -141,13 +156,14 @@ function Hotel() {
               <h2>
                 <b>${days * data?.cheapestPrice * options?.room }</b> ({days} nights)
               </h2>
-              <button>Reserver or Book Now!!</button>
+              <button onClick={handelClick}>Reserver or Book Now!!</button>
             </div>
           </div>
           <MailList />
           <Footer />
         </div>
       )}
+      {openModel && <Reserve setOpen={setopenModel} hotelId={id}/>}
     </div>
   );
 }

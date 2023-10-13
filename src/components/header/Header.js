@@ -15,8 +15,10 @@ import "react-date-range/dist/styles.css";
 import "react-date-range/dist/theme/default.css";
 import { format } from "date-fns";
 import { searchContext } from "../context/searchContext";
+import { AuthContext } from "../context/AuthContext";
 function Header({type}) {
   const navigate = useNavigate()
+  const {user} = useContext(AuthContext)
   const [openDate, setOpenDate] = useState(false);
   const [destination , setDistination] = useState("");
   const [openOptions, setOpenOptions] = useState(false);
@@ -78,7 +80,7 @@ function Header({type}) {
           Get rewarded for your travels - unlock instant savings of 10% or more
           with a free Lamabooking account
         </p>
-        <button className="headerbtn">Sign in/ Register</button>
+        {!user && <button className="headerbtn">Sign in/ Register</button>}
         <div className="headerSearch">
           <div className="headerSearchItem">
             <FontAwesomeIcon icon={faBed} className="headerIcon" />
