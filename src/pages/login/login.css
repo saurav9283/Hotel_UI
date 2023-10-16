@@ -8,6 +8,21 @@
     align-items: center;
     justify-content: center;
   }
+  .label{
+    color: black;
+    font-size: small;
+  }
+  .label1{
+    margin-top: 10px;
+    color: black;
+    font-size: small;
+  }
+  .lbox{
+    background-color: aliceblue;
+    padding: 3rem;
+    width: 20%;
+    border-radius: 25% 10%;
+  }
   
   .lContainer {
     display: flex;
@@ -21,6 +36,7 @@
   }
   
   .lbutton {
+    margin-top: 20px;
     border: none;
     padding: 10px 20px;
     background-color: #0071c2;
@@ -33,4 +49,8 @@
   .lbutton disabled{
     background-color: #0071c28c;
     cursor: not-allowed;
+  }
+
+  .r{
+    color: gray;
   }

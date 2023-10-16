@@ -1,13 +1,13 @@
 import { useContext, useState } from "react";
-import "./login.css";
+import "./register.css";
 import { AuthContext } from "../../components/context/AuthContext";
 import axios from "axios";
-import login from "../../components/images/login.jpg";
 import { Link, useNavigate } from "react-router-dom";
 
-const Login = () => {
+const Register = () => {
   const [credential, setCredential] = useState({
     username: "",
+    email:"",
     password: "",
   });
 
@@ -31,7 +31,7 @@ const Login = () => {
     } else {
       try {
         const res = await axios.post(
-          "http://localhost:8000/api/auth/login",
+          "http://localhost:8000/api/auth/register",
           credential
         );
 
@@ -53,9 +53,6 @@ const Login = () => {
       }
     }
   };
-  const goToRegister = () => {
-    navigate("/register")
-  }
 
   return (
     <div className="login">
@@ -67,6 +64,14 @@ const Login = () => {
             placeholder="username"
             className="lInput"
             id="username"
+            onChange={handelChange}
+          />
+          <label className="label1">Email:</label>
+          <input
+            type="email"
+            placeholder="Email"
+            className="lInput"
+            id="email"
             onChange={handelChange}
           />
           <label className="label1">Password:</label>
@@ -82,7 +87,9 @@ const Login = () => {
           <button disabled={loading} onClick={handleLogin} className="lbutton">
             Login
           </button>
-          <p className="r">Dont't have an Account ? <Link to={"/register"}>Register</Link></p>
+          <p className="r">
+            Already have an account? <Link to={"/login"}>Login</Link>
+          </p>
           {error && <span>{error?.message}</span>}
         </div>
       </div>
@@ -90,4 +97,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default Register;

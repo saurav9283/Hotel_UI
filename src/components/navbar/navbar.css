@@ -35,4 +35,16 @@
 
 .logout{
     cursor: pointer;
+    background-color: #0071c2;
+    border: none;
+    color: white;
+    padding: 3px;
+}
+.india{
+    width: 2%;
+    height: 4%;
+    border-radius: 50px;
+    position: absolute;
+    top: 15px;
+    right: 350px;
 }
