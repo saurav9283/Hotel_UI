@@ -5,8 +5,10 @@ import { faTimesCircle } from "@fortawesome/free-solid-svg-icons";
 import useFetch from "../hooks/useFetch";
 import { searchContext } from "../context/searchContext";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const Reserve = ({ setOpen, hotelId }) => {
+  const navigate = useNavigate()
   const { data, loading, error } = useFetch(
     `http://localhost:8000/api/hotels/room/${hotelId}`
   );
@@ -52,14 +54,17 @@ const Reserve = ({ setOpen, hotelId }) => {
 
   const handleReserve = async () => {
     try {
-       const a = await Promise.all(
+       await Promise.all(
         selectedRooms?.map((roomId) => {
-          return axios.put(`http://localhost:8000/api/rooms/availability/${roomId}`, {
+          const res =  axios.put(`http://localhost:8000/api/rooms/availability/${roomId}`, {
             dates: allDates,
           });
+          return res.data;
         })
         );
-        console.log(a)
+        setOpen(false)
+        navigate("/")
+        // console.log(a)
     } catch (error) {
       console.log(error);
     }
