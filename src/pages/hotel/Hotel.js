@@ -155,7 +155,7 @@ function Hotel() {
               <h2>
                 <b>${days * data?.cheapestPrice * options?.room }</b> ({days} nights)
               </h2>
-              <button>Reserver or Book Now!!</button>
+              <button onClick={handelClick}>Reserver or Book Now!!</button>
             </div>
           </div>
           <MailList />
