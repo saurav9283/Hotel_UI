@@ -25,3 +25,14 @@
     cursor: pointer;
     color: #003580;
 }
+.user {
+    position: relative;
+    display: flex;
+    text-underline-offset: auto;
+    text-transform: uppercase;
+    margin-right: 40px;
+  }
+
+.logout{
+    cursor: pointer;
+}
