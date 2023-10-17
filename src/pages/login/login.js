@@ -2,7 +2,6 @@ import { useContext, useState } from "react";
 import "./login.css";
 import { AuthContext } from "../../components/context/AuthContext";
 import axios from "axios";
-import login from "../../components/images/login.jpg";
 import { Link, useNavigate } from "react-router-dom";
 
 const Login = () => {
@@ -54,9 +53,9 @@ const Login = () => {
       }
     }
   };
-  const goToRegister = () => {
-    navigate("/register")
-  }
+  // const goToRegister = () => {
+  //   navigate("/register")
+  // }
 
   return (
     <div className="login">
@@ -83,7 +82,9 @@ const Login = () => {
           <button disabled={loading} onClick={handleLogin} className="lbutton">
             Login
           </button>
-          <p className="r">Dont't have an Account ? <Link to={"/register"}>Register</Link></p>
+          <p className="r">
+            Dont't have an Account ? <Link to={"/register"}>Register</Link>
+          </p>
           {error && <span>{error?.message}</span>}
         </div>
       </div>
