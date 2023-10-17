@@ -29,7 +29,7 @@ function Hotel() {
   const pathSegments = location.pathname.split("/");
   const id = pathSegments[2];
   const { data, loading, error } = useFetch(
-    `http://localhost:8000/api/hotels/${id}`
+    `https://hotel-management-api.vercel.app/api/hotels/${id}`
   );
   const [slidercount, setslidercount] = useState(0);
   const [open, setopen] = useState(false);

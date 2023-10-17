@@ -5,7 +5,7 @@ import useFetch from "../hooks/useFetch";
 
 function FeaturedProperty() {
   const { data, loading, error } = useFetch(
-    "http://localhost:8000/api/hotels?featured=true"
+    "https://hotel-management-api.vercel.app/api/hotels?featured=true"
     // "http://localhost:8000/api/hotels?featured=true&limit=2"
   );
 

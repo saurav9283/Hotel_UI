@@ -31,7 +31,7 @@ const Login = () => {
     } else {
       try {
         const res = await axios.post(
-          "http://localhost:8000/api/auth/login",
+          "https://hotel-management-api.vercel.app/api/auth/login",
           credential
         );
 
