@@ -5,7 +5,10 @@
     justify-content: space-between;
     gap: 20px;
 }
-
+.fpImg{
+    height: 150px;
+    width: 200px;
+}
 .fpItem{
     flex: 1;
     display: flex;
