@@ -14,6 +14,7 @@ function Featured() {
         <img src={dubai} alt="dubai" className="featuredImg" />
         <div className="featuredTitles">
           <h1>Jalandhar</h1>
+          
           <h2>{data[0]}</h2>
         </div>
       </div>
