@@ -5,7 +5,7 @@
     justify-content: center;
 }
 .navItems{
-    margin-right: 20px;
+    /* margin-right: 30px; */
 }
 .navcontainer{
     width: 100%;
@@ -48,5 +48,5 @@
     border-radius: 50px;
     position: absolute;
     top: 15px;
-    right: 350px;
+    right: 300px;
 }
