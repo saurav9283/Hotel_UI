@@ -1,27 +1,37 @@
-import React from "react";
+import React, { useCallback, useEffect } from "react";
 import "./propertyList.css";
 import useFetch from "../hooks/useFetch.js";
+import useEmblaCarousel from "embla-carousel-react";
+
+const options = { align: "start", containScroll: "trim", loop: true };
 
 function PropertyList() {
   const { data, loading, error } = useFetch(
-    // "http://localhost:8000/api/hotels/countByType"
     "https://hotel-management-api.vercel.app/api/hotels/countByType"
   );
+
+  const [emblaRef, emblaApi] = useEmblaCarousel(options);
+
+  useEffect(() => {
+    if (emblaApi) {
+      emblaApi.reInit();
+    }
+  }, [data, emblaApi]);
 
   const images = ["hotel", "appartments", "resort", "villa", "snow"];
 
   return (
-    <div className="pList">
+    <div className="pList" style={{ marginTop: "-20px" }}>
       {loading ? (
         "Loading"
       ) : (
-        <>
-          {data &&
-            images.map((img, index) => {
+        <div className="embla" ref={emblaRef}>
+          <div className="embla__container">
+            {images?.map((img, index) => {
               const matchingData = data.find((item) => item.type === img);
               return (
-                <div key={index} className="pListItem">
-                  <img
+                <div key={index} className="embla__slide pListItem">
+                <img
                     src={require(`../images/${img}.jpeg`)}
                     alt={img}
                     className="pListImg"
@@ -36,7 +46,8 @@ function PropertyList() {
                 </div>
               );
             })}
-        </>
+          </div>
+        </div>
       )}
     </div>
   );

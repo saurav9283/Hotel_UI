@@ -12,13 +12,35 @@
     overflow: hidden;
     cursor: pointer;
 }
-.pListImg{
+
+.embla {
+    overflow: hidden;
+}
+
+.embla__container {
+    display: flex;
+    gap: 20px;
+}
+
+.embla__slide {
+    flex: 0 0 auto;
+}
+
+.pListImg {
     width: 100%;
     height: 150px;
     object-fit: cover;
 }
 
-.pListTitle>h2{
+.pListTitle>h1 {
+    margin: 0;
+    font-size: 20px;
+    font-weight: bold;
+
+}
+
+.pListTitle>h2 {
     font-size: 14px;
+    margin-top: auto;
     font-weight: 300;
 }

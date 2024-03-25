@@ -1,26 +1,57 @@
-.featured{
+.featured {
     width: 100%;
     max-width: 1024px;
     display: flex;
     justify-content: space-between;
     gap: 20px;
     z-index: 1;
+    overflow: hidden;
 }
 
-.featuredItem{
+.embla {
+    overflow: hidden;
+}
+
+.embla__container {
+    display: flex;
+    gap: 20px;
+}
+
+.embla__slide {
+    flex: 0 0 auto;
+}
+
+.featuredItem {
     position: relative;
     color: white;
     border-radius: 10px;
     overflow: hidden;
-    height: 250px;
+    /* height: 250px; */
+    width: 100%;
+    height: auto;
 }
 
-.featuredImg{
+.featuredImg {
     width: 100%;
     height: 250px;
     object-fit: cover;
 }
-.featuredTitles{
+
+.featuredTitles {
     position: absolute;
     bottom: 20px;
+
+}
+
+.featuredTitles h1 {
+    margin: 0;
+    font-size: 20px;
+    /* Adjust font size as needed */
+    font-weight: bold;
+}
+
+.featuredTitles h2 {
+    margin-top: 5px;
+    font-size: 16px;
+    /* Adjust font size as needed */
 }

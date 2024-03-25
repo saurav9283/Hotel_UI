@@ -1,56 +1,70 @@
-
 .login {
   background-image: url("../../components/images/login.jpg");
-   background-size: cover;
+  background-size: cover;
   /* filter: blur(1px); */
-    height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  .label{
-    color: black;
-    font-size: small;
-  }
-  .label1{
-    margin-top: 10px;
-    color: black;
-    font-size: small;
-  }
-  .lbox{
-    background-color: aliceblue;
-    padding: 3rem;
-    width: 20%;
-    border-radius: 25% 10%;
-  }
-  
-  .lContainer {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-  }
-  
-  .lInput{
-    height: 30px;
-    padding: 10px;
-  }
-  
-  .lbutton {
-    margin-top: 20px;
-    border: none;
-    padding: 10px 20px;
-    background-color: #0071c2;
-    color: white;
-    font-weight: bold;
-    cursor: pointer;
-    border-radius: 5px;
-  }
-  
-  .lbutton disabled{
-    background-color: #0071c28c;
-    cursor: not-allowed;
-  }
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 
-  .r{
-    color: gray;
+.label {
+  color: black;
+  font-size: bold;
+}
+
+.label1 {
+  margin-top: 10px;
+  color: black;
+  font-size: bold;
+}
+
+.lbox {
+  background-color: aliceblue;
+  padding: 3rem;
+  width: 25%;
+  border-radius: 25% 10%;
+}
+
+.lContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.lInput {
+  height: 18px;
+  padding: 10px;
+}
+
+.lbutton {
+  margin-top: 20px;
+  border: none;
+  padding: 10px 20px;
+  background-color: #0071c2;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.lbutton disabled {
+  background-color: #0071c28c;
+  cursor: not-allowed;
+}
+
+.r {
+  color: gray;
+}
+
+@media screen and (max-width: 768px) {
+  .lbox {
+    width: 60%;
   }
+}
+
+@media screen and (max-width: 480px) {
+  .lbox {
+    width: 65%;
+  }
+}

@@ -30,9 +30,10 @@
 .user {
     position: relative;
     display: flex;
+    gap: 10px;
     text-underline-offset: auto;
     text-transform: uppercase;
-    margin-right: 40px;
+    margin-right: 60px;
   }
 
 .logout{
@@ -48,5 +49,5 @@
     border-radius: 50px;
     position: absolute;
     top: 15px;
-    right: 300px;
+    right: 330px;
 }

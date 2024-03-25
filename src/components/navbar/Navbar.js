@@ -38,7 +38,7 @@ function Navbar() {
                   Logout
                 </button>
               </div>
-              {user.username}
+              {/* {user.username} */}
             </div>
           </>
         ) : (

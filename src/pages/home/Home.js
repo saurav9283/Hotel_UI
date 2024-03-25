@@ -17,9 +17,9 @@ const Home = () => {
       <Headers/>
       <div className="homeContainer">
         <Featured/>
-        <h1 className="homeTitle">Browse by property type</h1>
-        <PropertyList />
-        <h1 className="homeTitle">Hotel Which Love Guest</h1>
+        <h1 className="homeTitle" style={{marginTop:"-10px"}}>Browse by property type</h1>
+        <PropertyList/>
+        <h1 className="homeTitle" style={{marginTop:"-20px"}}>Hotel Which Love Guest</h1>
         <FeaturedProperty/>
         <MailList/>
         <Footer/>

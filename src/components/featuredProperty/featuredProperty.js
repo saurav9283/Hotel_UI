@@ -10,7 +10,7 @@ function FeaturedProperty() {
   );
 
   return (
-    <div className="fp">
+    <div className="fp" style={{marginTop:"-20px"}}>
       {loading ? (
         "Loading"
       ) : (
