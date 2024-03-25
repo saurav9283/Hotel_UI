@@ -4,7 +4,9 @@
     display: flex;
     justify-content: center;
 }
-
+.navItems{
+    margin-right: 20px;
+}
 .navcontainer{
     width: 100%;
     max-width: 1024px;
