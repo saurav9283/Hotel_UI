@@ -39,7 +39,7 @@ const Register = () => {
             password:credential.password,
           }
           );
-          // console.log(res.data.msg,"jhvc")
+          console.log(res.data.msg,"jhvc")
 
         if (res.data.msg === "Username already Exist!") {
           alert("Username already Exist!");
