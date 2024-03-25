@@ -11,20 +11,31 @@ import useFetch from "../../components/hooks/useFetch.js";
 
 const List = () => {
   const location = useLocation();
+  console.log(location)
   const [destination, setDestination] = useState(location.state?.destination);
   const [dates, setDates] = useState(location.state?.dates);
   const [options, setOptions] = useState(location.state?.options);
   const [openDate, setOpenDate] = useState(false);
   const [min, setMin] = useState(undefined);
   const [max, setMax] = useState(undefined);
+  const handelChange1=(e) =>
+    {
+      console.log(e.target.value)
+        setMin(e.target.value)
+    }
+    const handelChange2=(e) =>
+    {
+      console.log(e.target.value)
+        setMax(e.target.value)
+    }
 
   const { data, loading, error ,reFetch} = useFetch(
-    `https://hotel-management-api.vercel.app/api/hotels?city=${destination}&min=${min || 0}&max=${max || 1500}`
+    `http://localhost:8000/api/hotels?city=${destination}&min=${min || 0}&max=${max || 1500}`
   );
 
   const handelClick = () => {
     reFetch();
-    }
+    }    
 
   return (
     <div>
@@ -61,13 +72,13 @@ const List = () => {
                       <span className="lsOptionText">
                         Min Price <small>per nighr</small>
                       </span>
-                      <input type="number" onClick={e=> setMin(e.target.value)} className="isOptioninput" />
+                      <input type="number" onChange={handelChange1} className="isOptioninput" />
                     </div>
                     <div className="listOptionItem">
                       <span className="lsOptionText">
                         Max Price <small>per nighr</small>
                       </span>
-                      <input type="number" onClick={e=> setMax(e.target.value)} className="isOptioninput" />
+                      <input type="number" onChange={handelChange2} className="isOptioninput" />
                     </div>
                     <div className="listOptionItem">
                       <span className="lsOptionText">Adult</span>

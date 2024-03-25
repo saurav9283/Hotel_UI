@@ -4,7 +4,7 @@ import useFetch from "../hooks/useFetch.js";
 
 function PropertyList() {
   const { data, loading, error } = useFetch(
-    "https://hotel-management-api.vercel.app/api/hotels/countByType"
+    "http://localhost:8000/api/hotels/countByType"
   );
 
   const images = ["hotel", "appartments", "resort", "villa", "snow"];

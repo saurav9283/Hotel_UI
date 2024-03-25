@@ -31,22 +31,27 @@ const Register = () => {
     } else {
       try {
         const res = await axios.post(
-          "https://hotel-management-api.vercel.app/api/auth/register",
-          credential
-        );
+          "http://localhost:8000/api/auth/register",
+          {
+            username:credential.username,
+            email:credential.email,
+            password:credential.password,
+          }
+          );
+          // console.log(res.data.msg,"jhvc")
 
-        if (res.data.message === "User not found!") {
-          alert("User not found.");
-          dispatch({ type: "LOGIN_FAILURE", payload: "User not found." });
-        } else if (res.data.message === "Wrong Password or Username!") {
-          alert("Wrong Password or Username.");
-          dispatch({
-            type: "LOGIN_FAILURE",
-            payload: "Wrong Password or Username.",
-          });
-        } else {
+        if (res.data.msg === "Username already Exist!") {
+          alert("Username already Exist!");
+          dispatch({ type: "LOGIN_FAILURE", payload: "Username already Exist!" });
+        } 
+        else if (res.data.msg === "Try to other email") {
+          alert("Try to other email");
+          dispatch({type: "LOGIN_FAILURE",payload: "Try to other email"});
+        } 
+        else {
+          alert(res.data.msg)
           dispatch({ type: "LOGIN_SUCCESS", payload: res.data });
-          navigate("/");
+          navigate("/login");
         }
       } catch (error) {
         dispatch({ type: "LOGIN_FAILURE", payload: error?.response.data });
@@ -85,7 +90,7 @@ const Register = () => {
           />
 
           <button disabled={loading} onClick={handleLogin} className="lbutton">
-            Login
+            Register
           </button>
           <p className="r">
             Already have an account? <Link to={"/login"}>Login</Link>
