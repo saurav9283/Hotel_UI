@@ -31,7 +31,8 @@ const Register = () => {
     } else {
       try {
         const res = await axios.post(
-          "http://localhost:8000/api/auth/register",
+          // "http://localhost:8000/api/auth/register",
+          "https://hotel-management-api.vercel.app/api/auth/register",
           {
             username:credential.username,
             email:credential.email,

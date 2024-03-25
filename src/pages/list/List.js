@@ -30,7 +30,8 @@ const List = () => {
     }
 
   const { data, loading, error ,reFetch} = useFetch(
-    `http://localhost:8000/api/hotels?city=${destination}&min=${min || 0}&max=${max || 1500}`
+    // `http://localhost:8000/api/hotels?city=${destination}&min=${min || 0}&max=${max || 1500}`
+    `https://hotel-management-api.vercel.app/api/hotels?city=${destination}&min=${min || 0}&max=${max || 1500}`
   );
 
   const handelClick = () => {

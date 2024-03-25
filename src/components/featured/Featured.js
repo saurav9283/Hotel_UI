@@ -6,7 +6,8 @@ import sea from "../images/sea.jpeg";
 import useFetch from "../hooks/useFetch";
 
 function Featured() {
-  const {data , loading , error} = useFetch("http://localhost:8000/api/hotels/countByCity?cities=Jalandhar,barlin,london")
+  // const {data , loading , error} = useFetch("http://localhost:8000/api/hotels/countByCity?cities=Jalandhar,barlin,london")
+  const {data , loading , error} = useFetch("https://hotel-management-api.vercel.app/api/hotels/countByCity?cities=Jalandhar,barlin,london")
 
   return (
     <div className="featured">
