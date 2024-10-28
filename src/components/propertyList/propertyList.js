@@ -2,6 +2,7 @@ import React, { useCallback, useEffect } from "react";
 import "./propertyList.css";
 import useFetch from "../hooks/useFetch.js";
 import useEmblaCarousel from "embla-carousel-react";
+import Skeleton from "@mui/material/Skeleton";
 
 const options = { align: "start", containScroll: "trim", loop: true };
 
@@ -23,12 +24,13 @@ function PropertyList() {
   return (
     <div className="pList" style={{ marginTop: "-20px" }}>
       {loading ? (
-        "Loading"
+        <Skeleton variant="rectangular" width={"100%"} height={"150px"} />
+
       ) : (
         <div className="embla" ref={emblaRef}>
           <div className="embla__container">
             {images?.map((img, index) => {
-              const matchingData = data.find((item) => item.type === img);
+              const matchingData = data.find((item) => item?.type === img);
               return (
                 <div key={index} className="embla__slide pListItem">
                 <img

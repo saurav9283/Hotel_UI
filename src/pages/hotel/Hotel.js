@@ -23,13 +23,14 @@ import useFetch from "../../components/hooks/useFetch";
 import { searchContext } from "../../components/context/searchContext";
 import { AuthContext } from "../../components/context/AuthContext";
 import Reserve from "../../components/reserve/Reserve";
+import axios from "axios";
 function Hotel() {
   const navigate = useNavigate()
   const location = useLocation();
   const pathSegments = location.pathname.split("/");
   const id = pathSegments[2];
   const { data, loading, error } = useFetch(
-    // `http://localhost:8000/api/hotels/${id}`
+    // `http://localhost:9000/api/hotels/${id}`
     `https://hotel-management-api.vercel.app/api/hotels/${id}`
   );
   const [slidercount, setslidercount] = useState(0);
@@ -71,15 +72,59 @@ function Hotel() {
     setslidercount(newSlideNumber);
   };
 
-  const handelClick =() => {
-    if(user)
-    {
-        setopenModel(true)
-    }
-    else{
-      navigate("/login")
-    }
-  }
+    const CheckoutHandel = async (amount) => {
+      try {
+        const {
+          data: { key },
+        } = await axios.get("http://localhost:9000/get_key");
+        // } = await axios.get("https://payment-gateway-ui.vercel.app/get_key");
+        // console.log(key)
+  
+        const {
+          data: { order },
+        } = await axios.post("http://localhost:9000/api/checkout", {
+        // } = await axios.post("https://payment-gateway-ui.vercel.app/api/checkout", {
+          amount,
+        });
+  
+        const options = {
+          key: key, // Enter the Key ID generated from the Dashboard
+          amount: order.amount, // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
+          currency: "INR",
+          name: "Testing Getway",
+          description: "wdjkbcbckddcb",
+          image: "https://avatars.githubusercontent.com/u/87579538?v=4",
+          order_id: order.id, //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
+          callback_url: "http://localhost:9000/api/paymentverification",
+          // callback_url: "https://payment-gateway-ui.vercel.app/api/paymentverification",
+          prefill: {
+            name: "Saurav Kumar",
+            email: "gaurav.kumar@example.com",
+            contact: "9000090000",
+          },
+          notes: {
+            address: "Razorpay Corporate Office",
+          },
+          theme: {
+            color: "#3399cc",
+          },
+        };
+        var rzp1 = new window.Razorpay(options);
+        rzp1.open();
+          
+        // console.log(data)
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    // if(user)
+    // {
+    //     setopenModel(true)
+    // }
+    // else{
+    //   navigate("/login")
+    // }
+  
   return (
     <div>
       <Navbar />
@@ -115,21 +160,21 @@ function Hotel() {
             </div>
           )}
           <div className="hotelWrapper">
-            <button className="booknow" onClick={handelClick}>Reserve or Book Now!</button>
+            <button className="booknow" onClick={() => CheckoutHandel(data?.cheapestPrice)}>Reserve or Book Now!</button>
             <h1 className="hoteltitle">{data?.name}</h1>
             <div className="hotelAddress">
               <FontAwesomeIcon icon={faLocationDot} />
               <span>{data.address}</span>
             </div>
             <span className="hoteldistance">
-              Excellent location {data.distance}m from center
+              Excellent location {data?.distance}m from center
             </span>
             <span className="hotelpricehighlight">
-              Book a stay over ${data.cheapestPrice} at this property and get a free airport taxi
+              Book a stay over ${data?.cheapestPrice} at this property and get a free airport taxi
             </span>
           </div>
           <div className="hotelimages">
-            {photos.map((photo, i) => (
+            {photos?.map((photo, i) => (
               <div key={i} className="hotelimageWrapper">
                 <img
                   onClick={() => handelOpen(i)}
@@ -144,7 +189,7 @@ function Hotel() {
             <div className="hoteldetailstexts">
               <h1 className="hoteltitle">{data?.title}</h1>
               <p className="hotelDesc">
-                {data.desc}
+                {data?.desc}
               </p>
             </div>
             <div className="hoteldetailsprice">
@@ -156,14 +201,14 @@ function Hotel() {
               <h2>
                 <b>${days * data?.cheapestPrice * options?.room }</b> ({days} nights)
               </h2>
-              <button onClick={handelClick}>Reserver or Book Now!!</button>
+              <button onClick={() => CheckoutHandel(data?.cheapestPrice)}>Reserver or Book Now!!</button>
             </div>
           </div>
           <MailList />
           <Footer />
         </div>
       )}
-      {openModel && <Reserve setOpen={setopenModel} hotelId={id}/>}
+      {/* {openModel && <Reserve setOpen={setopenModel} hotelId={id}/>} */}
     </div>
   );
 }

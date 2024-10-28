@@ -11,37 +11,38 @@ import useFetch from "../../components/hooks/useFetch.js";
 
 const List = () => {
   const location = useLocation();
-  console.log(location)
+  // console.log(location)
   const [destination, setDestination] = useState(location.state?.destination);
   const [dates, setDates] = useState(location.state?.dates);
   const [options, setOptions] = useState(location.state?.options);
   const [openDate, setOpenDate] = useState(false);
   const [min, setMin] = useState(undefined);
   const [max, setMax] = useState(undefined);
-  const handelChange1=(e) =>
-    {
-      console.log(e.target.value)
-        setMin(e.target.value)
-    }
-    const handelChange2=(e) =>
-    {
-      console.log(e.target.value)
-        setMax(e.target.value)
-    }
+  const handelChange1 = (e) => {
+    // console.log(e.target.value)
+    setMin(e.target.value)
+  }
+  const handelChange2 = (e) => {
+    // console.log(e.target.value)
+    setMax(e.target.value)
+  }
 
-  const { data, loading, error ,reFetch} = useFetch(
-    // `http://localhost:8000/api/hotels?city=${destination}&min=${min || 0}&max=${max || 1500}`
-    `https://hotel-management-api.vercel.app/api/hotels?city=${destination}&min=${min || 0}&max=${max || 1500}`
+  const { data, loading, error, reFetch } = useFetch(
+    `http://localhost:9000/api/hotels/search?city=${destination}&min=${min || 0}&max=${max || 1500}`
+    // `https://hotel-management-api.vercel.app/api/hotels/search?city=${destination}&min=${min || 0}&max=${max || 1500}`
   );
+  // const { data, loading, error ,reFetch} = useFetch(
+  //   "http://localhost:9000/api/hotels"
+  // );
 
   const handelClick = () => {
     reFetch();
-    }    
+  }
 
   return (
     <div>
       <Navbar />
-      {location.state ? (
+      {location?.state ? (
         <>
           <Header type="list" />
           <div className="listContainer">
@@ -54,10 +55,19 @@ const List = () => {
                 </div>
                 <div className="lsItem">
                   <label>check-in Date</label>
-                  <span onClick={() => setOpenDate(!openDate)}>{`${format(
+                  {/* <span onClick={() => setOpenDate(!openDate)}>{`${format(
                     dates[0]?.startDate,
                     "MM/dd/yyyy"  
                   )} to ${format(dates[0]?.endDate, "MM/dd/yyyy")}`}</span>
+                  {openDate && (
+                    <DateRange
+                      onChange={(item) => setDates([item.selection])}
+                      minDate={new Date()}
+                      ranges={dates}
+                    /> */}
+                  <span onClick={() => setOpenDate(!openDate)}>
+                    {dates && dates[0] ? `${format(dates[0].startDate, "MM/dd/yyyy")} to ${format(dates[0].endDate, "MM/dd/yyyy")}` : ''}
+                  </span>
                   {openDate && (
                     <DateRange
                       onChange={(item) => setDates([item.selection])}
@@ -87,7 +97,7 @@ const List = () => {
                         type="number"
                         min={1}
                         className="isOptioninput"
-                        placeholder={options.adult}
+                        placeholder={options?.adult}
                       />
                     </div>
                     <div className="listOptionItem">
@@ -96,7 +106,7 @@ const List = () => {
                         type="number"
                         min={0}
                         className="isOptioninput"
-                        placeholder={options.children}
+                        placeholder={options?.children}
                       />
                     </div>
                     <div className="listOptionItem">
@@ -105,7 +115,7 @@ const List = () => {
                         type="number"
                         min={1}
                         className="isOptioninput"
-                        placeholder={options.room}
+                        placeholder={options?.room}
                       />
                     </div>
                   </div>
@@ -117,7 +127,7 @@ const List = () => {
                   "Loading"
                 ) : (
                   <>
-                    {data.map((item) => (
+                    {data?.map((item) => (
                       <Searchlist item={item} key={item._id} />
                     ))}
                   </>

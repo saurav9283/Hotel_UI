@@ -14,8 +14,8 @@ const Searchlist = ({item}) => {
       {/* <img src={item.photos[0]} alt="" className="searchimage" /> */}
       {/* </div> */}
       <div className="searchDesc">
-        <h1 className="searchTitle">{item.name}</h1>
-        <span className="distance">{item.desc}</span>
+        <h1 className="searchTitle">{item?.name}</h1>
+        <span className="distance">{item?.desc}</span>
         <span className="taxioption">Free airpoart taxi</span>
         <span className="subtitle">Studio Apartment with Air conditioning</span>
 
@@ -31,10 +31,10 @@ const Searchlist = ({item}) => {
       <div className="searchdetails">
         {item?.rating && <div className="searchitemrating">
           <span>Excellent</span>
-          <button>{item.rating}</button>
+          <button>{item?.rating}</button>
         </div>}
         <div className="searchdetailtaxes">
-        <span className="searchprice">${item.cheapestPrice}</span>
+        <span className="searchprice">${item?.cheapestPrice}</span>
         <span className="searchtax">Include taxes and fees</span>
         <Link to={`/hotels/${item._id}`}>
         <button className="searchCheckbutton" onClick={handelsearch}>See availability</button>

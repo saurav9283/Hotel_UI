@@ -38,9 +38,9 @@
 }
 
 .featuredTitles {
+    /* box-shadow: rgba(0, 0, 0, 0.35) 0px -50px 36px -28px inset; */
     position: absolute;
     bottom: 20px;
-
 }
 
 .featuredTitles h1 {

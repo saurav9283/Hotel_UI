@@ -43,9 +43,9 @@ function Navbar() {
           </>
         ) : (
           <>
-            <div>
+            {/* <div>
               <img src={india} alt="india" className="india" />
-            </div>
+            </div> */}
             <div className="navItems">
               <button className="navButton" onClick={goRegister}>
                 Register

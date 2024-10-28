@@ -1,6 +1,6 @@
 import React, { useContext, useState } from "react";
-import { useNavigate } from "react-router-dom"; 
-import "./header.css"; 
+import { useNavigate } from "react-router-dom";
+import "./header.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faBed,
@@ -16,11 +16,11 @@ import "react-date-range/dist/theme/default.css";
 import { format } from "date-fns";
 import { searchContext } from "../context/searchContext";
 import { AuthContext } from "../context/AuthContext";
-function Header({type}) {
+function Header({ type }) {
   const navigate = useNavigate()
-  const {user} = useContext(AuthContext)
+  const { user } = useContext(AuthContext)
   const [openDate, setOpenDate] = useState(false);
-  const [destination , setDistination] = useState("");
+  const [destination, setDistination] = useState("");
   const [openOptions, setOpenOptions] = useState(false);
   const [dates, setDates] = useState([
     {
@@ -35,24 +35,31 @@ function Header({type}) {
     room: 1,
   });
 
-  const handelOption=(name, operation)=>{
+  const handelOption = (name, operation) => {
     setOptions((prev) => {
       return {
-        ...prev , [name]:operation ==="i" ? options[name]+1 : options[name]-1,
+        ...prev, [name]: operation === "i" ? options[name] + 1 : options[name] - 1,
       }
     })
   }
 
-  const {dispatch} = useContext(searchContext)
+  const { dispatch } = useContext(searchContext)
 
-  const handelSearch=()=>{
-    dispatch({type:"NEW_SEARCH" , payload:{destination , dates, options}})
-    navigate("/hotels", {state:{destination, dates, options}})
+  const handelSearch = () => {
+    if (!destination || !dates[0].startDate || !dates[0].endDate) {
+      return alert("Please fill all the fields")
+    }
+    dispatch({ type: "NEW_SEARCH", payload: { destination, dates, options } })
+    navigate("/hotels", { state: { destination, dates, options } })
+  }
+
+  const handleSign = () => {
+    navigate("/login")
   }
 
   return (
     <div className="header">
-      <div className={type === "list"? "headerContainer listmode": "headerContainer"}>
+      <div className={type === "list" ? "headerContainer listmode" : "headerContainer"}>
         <div className="headerList">
           <div className="headerListItem active">
             <FontAwesomeIcon icon={faBed} />
@@ -75,77 +82,77 @@ function Header({type}) {
             <span>Airport taxis</span>
           </div>
         </div>
-        { type !== "list" && <><h1 className="headerTitle">A lifetime of discount? It's Genius.</h1>
-        <p className="headerDesc">
-          Get rewarded for your travels - unlock instant savings of 10% or more
-          with a free Lamabooking account
-        </p>
-        {!user && <button className="headerbtn">Sign in/ Register</button>}
-        <div className="headerSearch">
-          <div className="headerSearchItem">
-            <FontAwesomeIcon icon={faBed} className="headerIcon" />
-            <input
-              type="text"
-              placeholder="Where are you going"
-              className="headerSearchInput"
-              onChange={e => setDistination(e.target.value)}
-            />
-          </div>
-          <div className="headerSearchItem">
-            <FontAwesomeIcon icon={faCalendarDays} className="headerIcon" />
-            <span
-              onClick={() => setOpenDate(!openDate)}
-              className="headerSearchText"
-            >{`${format(dates[0].startDate, "MM/dd/yyyy")} to ${format(
-              dates[0].endDate,
-              "MM/dd/yyyy"
-            )}`}</span>
-            {openDate && (
-              <DateRange
-                editableDateInputs={true}
-                onChange={(item) => setDates([item.selection])}
-                moveRangeOnFirstSelection={false}
-                ranges={dates}
-                className="date"
-                minDate={new Date()}
+        {type !== "list" && <><h1 className="headerTitle">A lifetime of discount? It's Genius.</h1>
+          <p className="headerDesc">
+            Get rewarded for your travels - unlock instant savings of 10% or more
+            with a free Lamabooking account
+          </p>
+          {!user && <button className="headerbtn" onClick={handleSign}>Sign in/ Register</button>}
+          <div className="headerSearch">
+            <div className="headerSearchItem">
+              <FontAwesomeIcon icon={faBed} className="headerIcon" />
+              <input
+                type="text"
+                placeholder="Where are you going"
+                className="headerSearchInput"
+                onChange={e => setDistination(e.target.value)}
               />
-            )}
-          </div>
-          <div className="headerSearchItem">
-            <FontAwesomeIcon icon={faPerson} className="headerIcon" />
-            <span onClick={()=> setOpenOptions(!openOptions)} className="headerSearchText">{`${options.adult} adult . ${options.children} children . ${options.room} room`}</span>
-            {openOptions && <div className="options">
-              <div className="optionItems">
-                <span className="optionText">Adult</span>
-                <div className="optionCounter">
-                  <button className="optionCounterButton" disabled={options.adult<=1} onClick={()=> handelOption("adult", "d")}>-</button>
-                  <span className="optionCounterNumber">{options.adult}</span>
-                  <button className="optionCounterButton" onClick={()=> handelOption("adult", "i")}>+</button>
-                </div>
-              </div>
-              <div className="optionItems">
-                <span className="optionText">Children</span>
-                <div className="optionCounter">
-                  <button className="optionCounterButton" disabled={options.children<=0} onClick={()=> handelOption("children", "d")}>-</button>
-                  <span className="optionCounterNumber">{options.children}</span>
-                  <button className="optionCounterButton" onClick={()=> handelOption("children", "i")}>+</button>
-                </div>
-              </div>
-              <div className="optionItems">
-                <span className="optionText">Room</span>
-                <div className="optionCounter">
-                  <button className="optionCounterButton" disabled={options.room<=1} onClick={()=> handelOption("room", "d")}>-</button>
-                  <span className="optionCounterNumber">{options.room}</span>
-                  <button className="optionCounterButton" onClick={()=> handelOption("room", "i")}>+</button>
-                </div>
-              </div>
             </div>
-            }
-          </div>
-          <div className="headerSearchItem">
-            <button className="headerbtn" onClick={handelSearch}>Search</button>
-          </div>
-        </div></>
+            <div className="headerSearchItem">
+              <FontAwesomeIcon icon={faCalendarDays} className="headerIcon" />
+              <span
+                onClick={() => setOpenDate(!openDate)}
+                className="headerSearchText"
+              >{`${format(dates[0].startDate, "MM/dd/yyyy")} to ${format(
+                dates[0].endDate,
+                "MM/dd/yyyy"
+              )}`}</span>
+              {openDate && (
+                <DateRange
+                  editableDateInputs={true}
+                  onChange={(item) => setDates([item.selection])}
+                  moveRangeOnFirstSelection={false}
+                  ranges={dates}
+                  className="date"
+                  minDate={new Date()}
+                />
+              )}
+            </div>
+            <div className="headerSearchItem">
+              <FontAwesomeIcon icon={faPerson} className="headerIcon" />
+              <span onClick={() => setOpenOptions(!openOptions)} className="headerSearchText">{`${options.adult} adult . ${options.children} children . ${options.room} room`}</span>
+              {openOptions && <div className="options">
+                <div className="optionItems">
+                  <span className="optionText">Adult</span>
+                  <div className="optionCounter">
+                    <button className="optionCounterButton" disabled={options.adult <= 1} onClick={() => handelOption("adult", "d")}>-</button>
+                    <span className="optionCounterNumber">{options.adult}</span>
+                    <button className="optionCounterButton" onClick={() => handelOption("adult", "i")}>+</button>
+                  </div>
+                </div>
+                <div className="optionItems">
+                  <span className="optionText">Children</span>
+                  <div className="optionCounter">
+                    <button className="optionCounterButton" disabled={options?.children <= 0} onClick={() => handelOption("children", "d")}>-</button>
+                    <span className="optionCounterNumber">{options.children}</span>
+                    <button className="optionCounterButton" onClick={() => handelOption("children", "i")}>+</button>
+                  </div>
+                </div>
+                <div className="optionItems">
+                  <span className="optionText">Room</span>
+                  <div className="optionCounter">
+                    <button className="optionCounterButton" disabled={options?.room <= 1} onClick={() => handelOption("room", "d")}>-</button>
+                    <span className="optionCounterNumber">{options.room}</span>
+                    <button className="optionCounterButton" onClick={() => handelOption("room", "i")}>+</button>
+                  </div>
+                </div>
+              </div>
+              }
+            </div>
+            <div className="headerSearchItem">
+              <button className="headerbtn" onClick={handelSearch}>Search</button>
+            </div>
+          </div></>
         }
       </div>
     </div>
