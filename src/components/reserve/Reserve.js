@@ -10,8 +10,11 @@ import { useNavigate } from "react-router-dom";
 const Reserve = ({ setOpen, hotelId }) => {
   const navigate = useNavigate()
   const { data, loading, error } = useFetch(
-    `http://localhost:9000/api/hotels/room/${hotelId}`
+    `https://hotel-management-api.vercel.app/api/hotels/room/${hotelId}`
   );
+  // const { data, loading, error } = useFetch(
+  //   `http://localhost:9000/api/hotels/room/${hotelId}`
+  // );
 
   const { dates } = useContext(searchContext);
 

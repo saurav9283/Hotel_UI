@@ -95,11 +95,11 @@ function Hotel() {
           description: "wdjkbcbckddcb",
           image: "https://avatars.githubusercontent.com/u/87579538?v=4",
           order_id: order.id, //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
-          callback_url: "http://localhost:9000/api/paymentverification",
+          callback_url: "https://payment-gateway-ui.vercel.app/api/paymentverification",
           // callback_url: "https://payment-gateway-ui.vercel.app/api/paymentverification",
           prefill: {
             name: "Saurav Kumar",
-            email: "gaurav.kumar@example.com",
+            email: "saurav.kumar@example.com",
             contact: "9000090000",
           },
           notes: {
